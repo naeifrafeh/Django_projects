@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Friends</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h5 style="text-align: right">
+    <a href="/logout">Logout</a></h5>
+    <br>
+
+<div class="container">
+        <h1>Welcome,  {{current_user.name}}</h1>
+        <h3>Here is the list of your friends: </h3>
+        {% if messages %}
+            {% for message in messages %}
+                <h1>{{ message }}</h1>
+            {% endfor %}
+        {% endif %} 
+           
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Alias</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    {%for user in friends%}
+    <tbody>
+      <tr>
+        <td>{{user.name}}</td>
+        <td><a href="/show/{{user.id}}">View Profile</a><a href="/remove_friend/{{user.id}}">remove as Friend</a></td>
+      </tr>
+      {%endfor%}
+    </tbody>
+    
+  </table><br><br>
+  <h3>Other Users not on your friend's list</h3>
+  <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Alias</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        {%for other in other_people%}
+          <tr>
+            <td><a href="/show_other/{{other.id}}">{{other.alias}}</a></td>
+            <a href=""><td><form action="/add_friend/{{other.id}}"><input type="submit" value="Add as Friend"></form></td></a>
+          </tr>
+          {%endfor%}
+
+        </tbody>
+        
+      </table><br><br>
+
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+    
+
+
+
+ 
+    <!-- <div class="container">           
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Tesks</th>
+                <th>time</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        {% for ap in apts %}
+        {%if ap.date.date == today %}
+        <tbody>
+        <tr>
+            <td>{{ap.tesks}}</td>
+            <td>{{ap.time}}</td>
+            <td>{{ap.status}}</td>
+            <td>
+            <a href="/editpage/{{ap.id}}">Edit</a>
+            <a href="/delete/{{ap.id}}">Delete</a>
+            </td>
+        </tr>
+
+            </tbody>
+         {%endif%}
+        {% endfor %}
+    </table>
+    </div>
+    <div>
+        <p>THe Other Opintments</p>
+            <div class="container">           
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>time</th>
+                                <th>Tesks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for ap in apts %}
+                            {%if ap.date.date != today%}
+                      <tr>
+                        <td>{{ap.date.date}}</td>
+                        <td>{{ap.time}}</td>
+                        <td>{{ap.tesks}}</td>
+                      </tr>
+                      </tbody>
+                      {%endif%}
+                    {% endfor %}
+                    </table>
+                    </div>
+                    <div>
+    <h1>Add Appointment</h1>
+    <form action="/add" method='POST'>
+        {% csrf_token %}
+        <div class="control-group">
+                <!-- Date-->
+                <!-- <label class="control-label" for="date">Date</label>
+                <div class="controls">
+                  <input type="date" id="date" name="date" placeholder="" class="input-xlarge">
+                </div>
+        <div class="control-group">
+            <!-- time-->
+            <!-- <label class="control-label" for="time">time</label>
+            <div class="controls">
+                <input type="time" id="time" name="time" placeholder="" class="input-xlarge">
+            </div>
+        <div class="control-group">
+                <!-- tesks-->
+            <!-- <label class="control-label" for="time">Tesks</label>
+            <div class="controls">
+                <input type="text" id="time" name="task" placeholder="" class="input-xlarge">
+        </div>
+    </form>
+    <a href="/"><button type="submit" class="btn btn-default">Add</button></a> --> 
+    </div>
+  </body>
+</html>
